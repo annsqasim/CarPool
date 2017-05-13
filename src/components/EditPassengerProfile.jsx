@@ -15,7 +15,7 @@ class EditPassengerProfile extends Component {
       <div className="App">
       <Header />
       <div className='form-inline' style={{margin: '5%'}}>
-        <h1>Edit Profile</h1>
+        <h1 className="panel-title">Edit Profile</h1>
         <div className='form-group'>
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
@@ -45,7 +45,7 @@ class EditPassengerProfile extends Component {
             <label className="radio-inline"><input type="radio" name="optradio" />Female</label>
           </div>
           <br/>
-          <h2>Pin point 1</h2>
+          <h2>PickUp Location</h2>
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
@@ -59,7 +59,7 @@ class EditPassengerProfile extends Component {
             placeholder='place'
             onChange={event => this.setState({password: event.target.value})}
           />
-          <h2>Pin point 2</h2>
+          <h2>DropOff Location</h2>
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
