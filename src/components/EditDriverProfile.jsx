@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { firebaseApp } from '../firebase';
-import Header from './Header';
+import HeaderDriver from './HeaderDriver';
 // import './css/App.css';
 
 class EditDriverProfile extends Component {
@@ -11,7 +11,7 @@ class EditDriverProfile extends Component {
   render() {
     return (
       <div className="App">
-      <Header />
+      <HeaderDriver />
       <div className='form-inline' style={{margin: '5%'}}>
         <h1 className="panel-title">Edit Profile</h1>
         <div className='form-group'>

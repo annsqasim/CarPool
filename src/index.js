@@ -5,17 +5,40 @@ import { createBrowserHistory } from 'history';
 import App from './components/App';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import KarCoolApp from './components/KarCoolApp';
+import Passenger from './components/Passenger';
+import Driver from './components/Driver';
 import EditPassengerProfile from './components/EditPassengerProfile';
+import EditDriverProfile from './components/EditDriverProfile';
 import './index.css';
 import { firebaseApp } from './firebase';
+import request from 'superagent';
 
 const browserHistory = createBrowserHistory();
 
 firebaseApp.auth().onAuthStateChanged(user =>{
   if (user) {
-    console.log(user.uid);
-    browserHistory.push('/karcoolapp');
+    const BASE_URL = 'http://192.168.0.104:8080/';
+    const SIGN_IN_USER = `${BASE_URL}user/${user.uid}`;
+    return new Promise((resolve, reject) => {
+      request
+      .get(SIGN_IN_USER)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+          browserHistory.replace('/signin');
+        } else {
+          console.log(JSON.parse(res.text));
+          const user = JSON.parse(res.text);
+          if (user.type === 'passenger') {
+            browserHistory.push('/passenger');
+          }
+          else if (user.type === 'driver') {
+            browserHistory.push('/driver');
+          }
+          resolve();
+        }
+      });
+    });
   } else {
     browserHistory.replace('/signin');
   }
@@ -27,8 +50,10 @@ ReactDOM.render(
       <Route path="/app" component={App} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/karcoolapp" component={KarCoolApp} />
+      <Route path="/passenger" component={Passenger} />
+      <Route path="/driver" component={Driver} />
       <Route path="/editpassengerprofile" component={EditPassengerProfile} />
+      <Route path="/editdriverprofile" component={EditDriverProfile} />
 
     </div>
   </Router>,

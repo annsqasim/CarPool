@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { firebaseApp } from '../firebase';
 import Header from './Header';
 // import './css/App.css';
 
-class KarCoolApp extends Component {
+class Passenger extends Component {
   render() {
     return (
       <div className="App">
@@ -14,4 +13,4 @@ class KarCoolApp extends Component {
   }
 }
 
-export default KarCoolApp;
+export default Passenger;
