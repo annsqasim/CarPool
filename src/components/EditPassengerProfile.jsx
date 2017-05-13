@@ -39,7 +39,7 @@ class EditPassengerProfile extends Component {
             onChange={event => this.setState({password: event.target.value})}
           />
           <br />
-          <div class="radio">
+          <div className="radio">
             <h3>Gender</h3>
             <label className="radio-inline"><input type="radio" name="optradio" />Male</label>
             <label className="radio-inline"><input type="radio" name="optradio" />Female</label>
