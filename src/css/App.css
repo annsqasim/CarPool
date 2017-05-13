@@ -1,5 +1,11 @@
+body{
+  background-image: url('../assets/img/bg.jpg');
+  background-size: cover;
+}
+
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -16,6 +22,20 @@
 
 .App-intro {
   font-size: large;
+}
+
+.formContainer{
+  border:1px solid #fff;
+  border-radius: 4px;
+  margin-top: 150px;
+}
+
+.panel-title{
+  font-weight: bold;
+  font-size: 24px;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 1rem;
 }
 
 @keyframes App-logo-spin {
