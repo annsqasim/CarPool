@@ -12,16 +12,31 @@ class DriverSignUp extends Component {
       password: '',
       error: {
         message: ''
-      }
+      },
+      userType: '',
     }
   }
   signUp = () => {
-    const { email, password } = this.state;
-    firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-    .catch(error => {
-      console.log('error', error);
-      this.setState({error});
-    })
+    if (this.state.userType && this.state.email && this.state.password) {
+      const { email, password } = this.state;
+      firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        const BASE_URL = 'http://192.168.0.104:8080/';
+        const ADD_USER = `${BASE_URL}${this.state.userType}/${user.uid}`;
+        console.log(ADD_USER);
+      })
+      .catch(error => {
+        console.log('error', error);
+        this.setState({error});
+      })
+    } else {
+      alert('Please input all fields');
+    }
+  }
+  setUserType = (e) => {
+    const op = document.getElementById('userType');
+    var userType = op.options[op.selectedIndex].value;
+    this.setState({userType});
   }
   render() {
     return (
@@ -31,7 +46,7 @@ class DriverSignUp extends Component {
             <div className="formContainer">
               <div className='form-horizontal' style={{margin: '5%'}}>
                 <div className="logo">
-                  <img src={logo} alt="Logo" width="100" align="center"/>
+                  <img src={logo} alt="Logo" width="100" />
                 </div>
                 <h2 className="panel-title">Sign Up</h2>
                 <div className='form-group'>
@@ -49,9 +64,10 @@ class DriverSignUp extends Component {
                     placeholder='password'
                     onChange={event => this.setState({password: event.target.value})}
                   />
-                  <select className="form-control">
-                    <option value="Passanger">Passenger</option>
-                    <option value="Drivr">Driver</option>
+                  <select id="userType" className="form-control" onChange={this.setUserType}>
+                    <option value="">Join as a</option>
+                    <option value="passenger">Passenger</option>
+                    <option value="driver">Driver</option>
                   </select>
                   <div className="col-md-6 col-sm-8">
                     <button

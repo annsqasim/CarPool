@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
 import Header from './Header';
 // import './css/App.css';

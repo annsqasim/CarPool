@@ -31,7 +31,7 @@ signIn = () => {
               <div className="formContainer">
                 <div className='form-horizontal' style={{margin: '5%'}}>
                   <div className="logo">
-                    <img src={logo} alt="Logo" width="100" align="center"/>
+                    <img src={logo} alt="Logo" width="100" />
                   </div>
                   <h2 className="panel-title">Sign In</h2>
                   <div className='form-group'>
@@ -56,7 +56,7 @@ signIn = () => {
                         Sign In
                       </button>
                       <div className="error">{this.state.error.message}</div>
-                    </div>  
+                    </div>
                     <div className="col-md-6 col-sm-8">
                       <div><Link className="kc-btn redirect" to={'/signup'}>Sign Up</Link></div>
                     </div>
