@@ -15,7 +15,7 @@ const browserHistory = createBrowserHistory();
 firebaseApp.auth().onAuthStateChanged(user =>{
   if (user) {
     console.log(user.uid);
-    browserHistory.push('/karkoolapp');
+    browserHistory.push('/karcoolapp');
   } else {
     browserHistory.replace('/signin');
   }
@@ -27,7 +27,7 @@ ReactDOM.render(
       <Route path="/app" component={App} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/karkoolapp" component={KarCoolApp} />
+      <Route path="/karcoolapp" component={KarCoolApp} />
       <Route path="/editpassengerprofile" component={EditPassengerProfile} />
 
     </div>

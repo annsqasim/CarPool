@@ -3,9 +3,9 @@ import { firebaseApp } from '../firebase';
 import Header from './Header';
 // import './css/App.css';
 
-class EditPassengerProfile extends Component {
+class EditDriverProfile extends Component {
 
-  editPassengerProfile = () => {
+  editDriverProfile = () => {
     console.log('hello');
   }
   render() {
@@ -26,6 +26,13 @@ class EditPassengerProfile extends Component {
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
+            placeholder='cnic'
+            onChange={event => this.setState({email: event.target.value})}
+          />
+          <input
+            style={{marginRight: '5px', marginTop: '5px'}}
+            className='form-control'
+            type='text'
             placeholder='address'
             onChange={event => this.setState({password: event.target.value})}
           />
@@ -34,6 +41,34 @@ class EditPassengerProfile extends Component {
             className='form-control'
             type='text'
             placeholder='phone no'
+            onChange={event => this.setState({password: event.target.value})}
+          />
+          <input
+            style={{marginRight: '5px', marginTop: '5px'}}
+            className='form-control'
+            type='text'
+            placeholder='Car name'
+            onChange={event => this.setState({password: event.target.value})}
+          />
+          <input
+            style={{marginRight: '5px', marginTop: '5px'}}
+            className='form-control'
+            type='text'
+            placeholder='License'
+            onChange={event => this.setState({password: event.target.value})}
+          />
+          <input
+            style={{marginRight: '5px', marginTop: '5px'}}
+            className='form-control'
+            type='text'
+            placeholder='Car model'
+            onChange={event => this.setState({password: event.target.value})}
+          />
+          <input
+            style={{marginRight: '5px', marginTop: '5px'}}
+            className='form-control'
+            type='text'
+            placeholder='Capacity'
             onChange={event => this.setState({password: event.target.value})}
           />
           <br />
@@ -85,4 +120,4 @@ class EditPassengerProfile extends Component {
   }
 }
 
-export default EditPassengerProfile;
+export default EditDriverProfile;
