@@ -10,6 +10,13 @@ class Header extends Component {
   render() {
     return (
       <div className="App">
+        <nav className="navbar navbar-default">
+          <div className="container">
+            <button  className='btn btn-danger' onClick={this.signOut}>SignOut</button>
+            <Link className="btn btn-danger" to={'/editpassengerprofile'}>My Account</Link>
+            <Link className="btn btn-danger" to={'/karkoolapp'}>Home</Link>
+          </div>
+        </nav>
         <button  className='btn btn-danger' onClick={this.signOut}>SignOut</button>
         <Link className="btn btn-danger" to={'/editpassengerprofile'}>My Account</Link>
         <Link className="btn btn-danger" to={'/karkoolapp'}>Home</Link>

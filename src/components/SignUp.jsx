@@ -49,6 +49,10 @@ class DriverSignUp extends Component {
                     placeholder='password'
                     onChange={event => this.setState({password: event.target.value})}
                   />
+                  <select className="form-control">
+                    <option value="Passanger">Passenger</option>
+                    <option value="Drivr">Driver</option>
+                  </select>
                   <div className="col-md-6 col-sm-8">
                     <button
                       onClick={this.signUp}

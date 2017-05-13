@@ -78,11 +78,16 @@ body {
 	color: #fff;
 }
 
+.navbar{
+	background-color: #38be69;
+}
+
 
 input, select, textarea, .form-control{
 	border:none;
 	box-shadow: none;
 	border-bottom: 1px solid #ccc;
+	margin-bottom: 1rem;
 }
 
 .form-control:focus{
