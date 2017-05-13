@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
+import Header from './Header';
 // import './css/App.css';
 
 class KarCoolApp extends Component {
@@ -9,7 +11,7 @@ class KarCoolApp extends Component {
   render() {
     return (
       <div className="App">
-      <button style={{float:'right'}} className='btn btn-danger' onClick={this.signOut}>SignOut</button>
+      <Header />
         IN app
       </div>
     );
