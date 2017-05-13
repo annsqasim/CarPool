@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
+import logo from '../assets/img/cp.png';
 // import './css/App.css';
 
 class DriverSignIn extends Component {
@@ -29,6 +30,9 @@ signIn = () => {
             <div className="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
               <div className="formContainer">
                 <div className='form-horizontal' style={{margin: '5%'}}>
+                  <div className="logo">
+                    <img src={logo} alt="Logo" width="100" align="center"/>
+                  </div>
                   <h2 className="panel-title">Sign In</h2>
                   <div className='form-group'>
                     <input
@@ -45,14 +49,17 @@ signIn = () => {
                       placeholder='password'
                       onChange={event => this.setState({password: event.target.value})}
                     />
-                    <button
-                      style={{marginRight: '5px', marginTop: '5px'}}
-                      onClick={this.signIn}
-                      className='btn btn-primary'>
-                      Sign In
-                    </button>
-                    <div>{this.state.error.message}</div>
-                    <div><Link className="" to={'/signup'}>Sign Up</Link></div>
+                    <div className="col-md-6 col-sm-8">
+                      <button
+                        onClick={this.signIn}
+                        className='kc-btn'>
+                        Sign In
+                      </button>
+                      <div className="error">{this.state.error.message}</div>
+                    </div>  
+                    <div className="col-md-6 col-sm-8">
+                      <div><Link className="kc-btn redirect" to={'/signup'}>Sign Up</Link></div>
+                    </div>
                   </div>
               </div>
             </div>

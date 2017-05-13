@@ -1,10 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-}
-body{
-  background-size: cover;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App {
@@ -28,8 +25,13 @@ body{
   font-size: large;
 }
 
+.logo{
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .formContainer{
-  border:1px solid #fff;
+  border: 1px solid #ccc;
   border-radius: 4px;
   margin-top: 150px;
 }
@@ -37,9 +39,58 @@ body{
 .panel-title{
   font-weight: bold;
   font-size: 24px;
-  color: #fff;
+  color: #ccc;
   border-bottom: 1px solid #fff;
   padding-bottom: 1rem;
+  text-align: center
+}
+
+.kc-btn{
+	background-color: #38be69;
+	color: #fff;
+	font-weight: 300;
+	border:none;
+	display: block;
+	width: 100%;
+	margin: 1rem 0rem;
+	padding: 1rem;
+	font-size: 22px;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+
+.kc-btn:hover{
+	background-color: #fff;
+	color: #38be69;
+	border:1px solid #38be69;
+}
+
+.kc-btn.redirect{
+	background-color: #fff;
+	border: 1px solid #ccc;
+	color:#38be69;
+	transition: all 0.3s ease;
+	text-decoration: none;
+}
+
+.kc-btn.redirect:hover{
+	background-color: #38be69;
+	color: #fff;
+}
+
+
+input, select, textarea, .form-control{
+	border:none;
+	box-shadow: none;
+	border-bottom: 1px solid #ccc;
+}
+
+.form-control:focus{
+	box-shadow: none;
+}
+
+.error{
+	color: #e12222;
 }
 
 @keyframes App-logo-spin {
