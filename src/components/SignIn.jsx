@@ -52,7 +52,7 @@ signIn = () => {
                       Sign In
                     </button>
                     <div>{this.state.error.message}</div>
-                    <div><Link className="" to={'/driversignup'}>Sign Up</Link></div>
+                    <div><Link className="" to={'/signup'}>Sign Up</Link></div>
                   </div>
               </div>
             </div>

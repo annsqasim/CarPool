@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
-import '../css/App.css';
+// import './css/App.css';
 
-class PassengerSignUp extends Component {
+class DriverSignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,11 +48,11 @@ class PassengerSignUp extends Component {
             Sign Up
           </button>
           <div>{this.state.error.message}</div>
-          <div><Link className="" to={'/passengersignin'}>SignIn</Link></div>
+          <div><Link className="" to={'/signin'}>Sign In</Link></div>
         </div>
       </div>
     );
   }
 }
 
-export default PassengerSignUp;
+export default DriverSignUp;
