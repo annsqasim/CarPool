@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
 import logo from '../assets/img/cp.png';
+import request from 'superagent';
 // import './css/App.css';
 
 class DriverSignUp extends Component {
@@ -16,6 +17,24 @@ class DriverSignUp extends Component {
       userType: '',
     }
   }
+
+  addUser(url) {
+    return new Promise((resolve, reject) => {
+
+      request
+      .post(url)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+          reject();
+        } else {
+          console.log(res);
+          resolve();
+        }
+      });
+    });
+  }
+
   signUp = () => {
     if (this.state.userType && this.state.email && this.state.password) {
       const { email, password } = this.state;
@@ -24,6 +43,7 @@ class DriverSignUp extends Component {
         const BASE_URL = 'http://192.168.0.104:8080/';
         const ADD_USER = `${BASE_URL}${this.state.userType}/${user.uid}`;
         console.log(ADD_USER);
+        this.addUser(ADD_USER);
       })
       .catch(error => {
         console.log('error', error);
