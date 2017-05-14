@@ -87,6 +87,18 @@ class EditPassengerProfile extends Component {
       });
     });
   }
+  setPlace1 = (e) => {
+    const op = document.getElementById('place1');
+    var place1 = op.options[op.selectedIndex].value;
+    this.setState({place1});
+    console.log(this.state.place1);
+  }
+  setPlace2 = (e) => {
+    const op = document.getElementById('place2');
+    var place2 = op.options[op.selectedIndex].value;
+    this.setState({place2});
+    console.log(this.state.place1);
+  }
   getLocations(url) {
     return new Promise((resolve, reject) => {
       request
@@ -166,16 +178,17 @@ class EditPassengerProfile extends Component {
         <div className="form-group row">
           <label for="example-password-input" className="col-md-2 col-form-label">Pickup Location</label>
           <div className="col-md-10">
-            <input
-              style={{marginRight: '5px', marginTop: '5px'}}
-              className='form-control'
-              type='text'
-              placeholder='place'
-              value={this.state.place1}
-              onChange={event => this.setState({place1: event.target.value})}
-            />
+          <select value={this.state.place1} style={{width: '40%',float: 'left', padding: '1%'}} id="place1"  onChange={this.setPlace1}>
+            <option value="">Pickup place</option>
+            {
+              this.state.locations.map((location)=>{
+                 return <option value={location.name}>{location.name}</option>
+              })
+            }
+          </select>
           </div>
         </div>
+
         <h2 className="panel-title">DropOff Location</h2>
         <div className="form-group row">
           <label for="example-number-input" className="col-md-2 col-form-label">Return Time</label>
@@ -192,17 +205,17 @@ class EditPassengerProfile extends Component {
         <div className="form-group row">
           <label for="example-datetime-local-input" className="col-md-2 col-form-label">DropOff Place</label>
           <div className="col-md-10">
-            <input
-              style={{marginRight: '5px', marginTop: '5px'}}
-              className='form-control'
-              type='text'
-              placeholder='place'
-              value={this.state.place2}
-              onChange={event => this.setState({place2: event.target.value})}
-            />
+          <select value={this.state.place2} style={{width: '40%',float: 'left', padding: '1%'}} id="place2"  onChange={this.setPlace2}>
+            <option value="">Pickup place</option>
+            {
+              this.state.locations.map((location)=>{
+                 return <option value={location.name}>{location.name}</option>
+              })
+            }
+          </select>
           </div>
         </div>
-        <select value={this.state.gender} id="gender" style={{width: '20%', float: 'left', padding: '1%'}}className="" onChange={this.setGender}>
+        <select value={this.state.gender} id="gender" style={{width: '20%', float: 'left', padding: '1%'}} className="" onChange={this.setGender}>
           <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
