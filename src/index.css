@@ -140,6 +140,41 @@ input, select, textarea, .form-control{
     z-index: 2
 }
 
+.get-the-app-content{
+	background-image: url('assets/img/blur-bg.jpg');
+    background-size: cover;
+    padding-bottom:4rem;
+}
+
+.sign-in-page-heading{
+	color:#666666;
+	margin-bottom: 3rem;
+	text-transform: uppercase;
+}
+
+.card-section{
+	padding: 50px 0px;
+}
+
+.card{
+	border:1px solid #38be69;
+	margin-bottom: 1rem;
+}
+
+.card .info{
+	text-align: left;
+}
+
+.call-to{
+	background-color: #38be69;
+	text-decoration: none;
+	padding: 1rem 2rem;
+	border-radius: 4px;
+	color: #fff;
+	position: relative;
+	top: 23px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
