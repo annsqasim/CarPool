@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HeaderDriver from './HeaderDriver';
-import Autocomplete from 'react-autocomplete';
 import request from 'superagent';
+import { firebaseApp } from '../firebase';
 // import './css/App.css';
 
 class EditDriverProfile extends Component {
@@ -20,11 +20,6 @@ class EditDriverProfile extends Component {
       gender:'',
     };
   }
-  componentDidMount () {
-    const BASE_URL = 'http://192.168.0.104:8080/';
-    const url =`${BASE_URL}location`;
-    this.getLocations(url);
-  }
   getLocations(url) {
     return new Promise((resolve, reject) => {
       request
@@ -40,14 +35,87 @@ class EditDriverProfile extends Component {
       });
     });
   }
+  addLoc = () => {
+    const newLoc = document.getElementById('location');
+    const newLocations = this.state.locations;
+    const loc = newLoc.options[newLoc.selectedIndex].value;
+    newLocations.push(loc);
+    this.setState({ locations: newLocations });
+    console.log(this.state.locations);
+  }
   setGender = () => {
     const op = document.getElementById('gender');
     var gender = op.options[op.selectedIndex].value;
     this.setState({gender});
   }
   editDriverProfile = () => {
-    console.log('hello');
+    const user = firebaseApp.auth().currentUser;
+    const BASE_URL = 'http://192.168.0.104:8080/';
+    const SET_PAS_PRO = `${BASE_URL}driver/${user.uid}`;
+    this.setDriverProfile(SET_PAS_PRO);    
   }
+  componentDidMount () {
+    const driver = firebaseApp.auth().currentUser;
+    const MY_BASE_URL = 'http://192.168.0.104:8080/';
+    const GET_DRIVER = `${MY_BASE_URL}driver/${driver.uid}`;
+    this.getDriver(GET_DRIVER);
+    const BASE_URL = 'http://192.168.0.104:8080/';
+    const url =`${BASE_URL}location`;
+    this.getLocations(url);
+  }
+  getDriver =(url)=>{
+    return new Promise((resolve, reject) => {
+      request
+      .get(url)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(JSON.parse(res.text));
+          const data = JSON.parse(res.text);
+          this.setState({
+            name: data.name,
+            cnic: data.cnic,
+            gender: data.gender,
+            address: data.address,
+            phone: data.phone,
+            carName: data.carName,
+            license: data.license,
+            locations: data.locations,
+            capacity: +data.capacity,
+            carModel: data.carModel});
+          console.log(this.state)
+          resolve();
+        }
+      });
+    });
+  }
+  setDriverProfile(url) {
+    return new Promise((resolve, reject) => {
+      request
+      .put(url)
+      .send({name: this.state.name,
+        cnic: this.state.cnic,
+        gender: this.state.gender,
+        address: this.state.address,
+        phone: this.state.phone,
+        carName: this.state.carName,
+        license: this.state.license,
+        locations: this.state.locations,
+        capacity: +this.state.capacity,
+        carModel: this.state.carModel})
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+          reject();
+        } else {
+          console.log(res);
+          resolve();
+        }
+      });
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -60,6 +128,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='name'
+            value={this.state.name}
             onChange={event => this.setState({name: event.target.value})}
           />
           <input
@@ -67,6 +136,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='cnic'
+            value={this.state.cnic}
             onChange={event => this.setState({cnic: event.target.value})}
           />
           <input
@@ -74,6 +144,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='address'
+            value={this.state.address}
             onChange={event => this.setState({address: event.target.value})}
           />
           <input
@@ -81,6 +152,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='phone no'
+            value={this.state.phone}
             onChange={event => this.setState({phoneNo: event.target.value})}
           />
           <br/>
@@ -89,6 +161,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='Car name'
+            value={this.state.carName}
             onChange={event => this.setState({carName: event.target.value})}
           />
           <input
@@ -96,6 +169,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='License'
+            value={this.state.license}
             onChange={event => this.setState({license: event.target.value})}
           />
           <input
@@ -103,6 +177,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='Car model'
+            value={this.state.carModel}
             onChange={event => this.setState({carModel: event.target.value})}
           />
           <input
@@ -110,6 +185,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='Capacity'
+            value={this.state.capacity}
             onChange={event => this.setState({capacity: event.target.value})}
           />
           <br />
@@ -121,16 +197,25 @@ class EditDriverProfile extends Component {
           <br/>
           <h2>Locations</h2>
           <br />
-          <Autocomplete
-            getItemValue={''}
-            items={this.state.locations}
-            renderItem={''}
-          />
+          <select id="location" value={this.state.place1} style={{width: '40%',float: 'left', padding: '1%'}} id="place1"  onChange={this.setPlace1}>
+            <option value="">Pickup place</option>
+            {
+              this.state.locations.map((location)=>{
+                 return <option value={location.name}>{location.name}</option>
+              })
+            }
+          </select>
+          <button
+            style={{marginRight: '5px', marginTop: '5px'}}
+            onClick={this.addLoc}
+            className='btn'>
+            Add
+          </button>
           <br />
           <button
             style={{marginRight: '5px', marginTop: '5px'}}
-            onClick={this.editPassengerProfile}
-            className='btn btn-primary'>
+            onClick={this.editDriverProfile}
+            className='kc-btn'>
             Save
           </button>
         </div>
