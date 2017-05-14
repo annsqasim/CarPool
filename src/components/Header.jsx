@@ -29,7 +29,7 @@ class Header extends Component {
                 <li><Link to={'/passenger'}>Home</Link></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <li><button onClick={this.signOut}>SignOut</button></li>
+                <li><button style={{marginTop: '10px', color: 'white'}} className="btn btn-link" onClick={this.signOut}>SignOut</button></li>
               </ul>
             </div>
           </div>

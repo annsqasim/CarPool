@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { firebaseApp } from '../firebase';
 import HeaderDriver from './HeaderDriver';
 // import './css/App.css';
 

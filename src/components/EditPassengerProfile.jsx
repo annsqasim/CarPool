@@ -1,12 +1,37 @@
 import React, { Component } from 'react';
-import { firebaseApp } from '../firebase';
 import Header from './Header';
+import request from 'superagent';
 // import './css/App.css';
 
 class EditPassengerProfile extends Component {
-
+  constructor (props) {
+    super(props);
+    this.state = {
+      locations: []
+    }
+  }
   editPassengerProfile = () => {
     console.log('hello');
+  }
+  componentDidMount () {
+    const BASE_URL = 'http://192.168.0.104:8080/';
+    const url =`${BASE_URL}location`;
+    this.getLocations(url);
+  }
+  getLocations(url) {
+    return new Promise((resolve, reject) => {
+      request
+      .get(url)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const response = JSON.parse(res.text);
+          this.setState({locations: response.locations});
+          resolve();
+        }
+      });
+    });
   }
   render() {
     return (
@@ -14,7 +39,7 @@ class EditPassengerProfile extends Component {
       <Header />
       <h1 className="panel-title">Edit Profile</h1>
       <div className="container">
-      <div className="row">        
+      <div className="row">
         <div className="form-group row">
           <label for="example-text-input" className="col-md-2 col-form-label">Name</label>
           <div className="col-md-10">
@@ -38,7 +63,7 @@ class EditPassengerProfile extends Component {
               onChange={event => this.setState({password: event.target.value})}
             />
           </div>
-        </div>        
+        </div>
         <div className="form-group row">
           <label for="example-tel-input" className="col-md-2 col-form-label">Telephone</label>
           <div className="col-md-10">

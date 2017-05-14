@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
-import { createBrowserHistory } from 'history';
 import logo from '../assets/img/cp.png';
 import request from 'superagent';
 // import './css/App.css';
@@ -20,7 +19,6 @@ class DriverSignUp extends Component {
   }
 
   addUser(url) {
-    const browserHistory = createBrowserHistory();
     return new Promise((resolve, reject) => {
       request
       .post(url)
@@ -30,12 +28,7 @@ class DriverSignUp extends Component {
           reject();
         } else {
           console.log(res);
-          if (this.state.userType === 'passenger') {
-            browserHistory.push('/passenger');
-          }
-          else if (this.state.userType === 'driver') {
-            browserHistory.push('/driver');
-          }
+          alert('Your account has been created now you can sign in');
           resolve();
         }
       });
