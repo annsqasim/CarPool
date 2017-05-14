@@ -31,6 +31,10 @@ class Listing extends Component {
             status.innerHTML = 'Subscribed Successfully';
             // this.setState({ state: "Subscribed Successfully" });
           }
+          if(res.text === 'Already subscribed'){
+            alert(res.text);
+            // this.setState({ state: "Subscribed Successfully" });
+          }
           resolve();
         }
       });
@@ -50,7 +54,7 @@ class Listing extends Component {
             Locations :
             {
               this.props.driver.locations.map((loc, key)=>{
-                return <span className="btn"><b> {loc}</b> </span>
+                return <span key={key} className="btn"><b> {loc}</b> </span>
               })
             }
           </div>
