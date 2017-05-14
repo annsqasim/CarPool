@@ -38,6 +38,7 @@ class Listing extends Component {
   }
 
   render() {
+    console.log(this.props.driver);
     return (
       <div className="container">
         <div className="row card">
@@ -46,6 +47,12 @@ class Listing extends Component {
             <p>No of Customers : {this.props.driver.subscriptions}</p>
             <p>Time 1 : {this.props.driver.pickupTime1}</p>
             <p>Phone: {this.props.driver.phone}</p>
+            Locations :
+            {
+              this.props.driver.locations.map((loc, key)=>{
+                return <span className="btn"><b> {loc}</b> </span>
+              })
+            }
           </div>
           <div className="col-md-3 contact-info">
             <h4>Capacity : {this.props.driver.capacity}</h4>
