@@ -9,6 +9,7 @@ class EditDriverProfile extends Component {
     super(props);
     this.state = {
       locations: [],
+      driverLocation: [],
       name: '',
       cnic:'',
       address:'',
@@ -37,22 +38,47 @@ class EditDriverProfile extends Component {
   }
   addLoc = () => {
     const newLoc = document.getElementById('location');
-    const newLocations = this.state.locations;
+    const newLocations = this.state.driverLocation;
     const loc = newLoc.options[newLoc.selectedIndex].value;
     newLocations.push(loc);
-    this.setState({ locations: newLocations });
-    console.log(this.state.locations);
+    this.setState({ driverLocation: newLocations });
+    console.log(this.state.driverLocation);
+  }
+  setPlace = () => {
+    const op = document.getElementById('location');
+    const location = op.options[op.selectedIndex].value;
+    let valueExist = '';
+    valueExist = this.state.driverLocation.filter((loc)=>{
+      return location === loc;
+    })
+    console.log(valueExist.length);
+    if(valueExist.length > 0){
+      alert('Already Added');
+    } else {
+      const newLocations = this.state.driverLocation;
+      newLocations.push(location);
+      this.setState({ driverLocation: newLocations });
+      console.log(this.state.driverLocation);
+    }
   }
   setGender = () => {
     const op = document.getElementById('gender');
     var gender = op.options[op.selectedIndex].value;
     this.setState({gender});
   }
+  deleteLocation = (e) => {
+    const driverLocation = this.state.driverLocation.filter((loc)=>{
+      return loc !== e;
+    })
+    this.setState({driverLocation});
+    console.log(this.state.driverLocation);
+  }
   editDriverProfile = () => {
     const user = firebaseApp.auth().currentUser;
     const BASE_URL = 'http://192.168.0.104:8080/';
     const SET_PAS_PRO = `${BASE_URL}driver/${user.uid}`;
-    this.setDriverProfile(SET_PAS_PRO);    
+    this.setDriverProfile(SET_PAS_PRO);
+    alert('Changes saved');
   }
   componentDidMount () {
     const driver = firebaseApp.auth().currentUser;
@@ -81,7 +107,7 @@ class EditDriverProfile extends Component {
             phone: data.phone,
             carName: data.carName,
             license: data.license,
-            locations: data.locations,
+            driverLocation: data.locations,
             capacity: +data.capacity,
             carModel: data.carModel});
           console.log(this.state)
@@ -101,7 +127,7 @@ class EditDriverProfile extends Component {
         phone: this.state.phone,
         carName: this.state.carName,
         license: this.state.license,
-        locations: this.state.locations,
+        locations: this.state.driverLocation,
         capacity: +this.state.capacity,
         carModel: this.state.carModel})
       .end((err, res) => {
@@ -152,7 +178,7 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='phone no'
-            value={this.state.phone}
+            value={this.state.phoneno}
             onChange={event => this.setState({phoneNo: event.target.value})}
           />
           <br/>
@@ -189,7 +215,7 @@ class EditDriverProfile extends Component {
             onChange={event => this.setState({capacity: event.target.value})}
           />
           <br />
-          <select id="gender" className="form-control" onChange={this.setGender}>
+          <select id="gender" value={this.state.gender} className="form-control" onChange={this.setGender}>
             <option value="">Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -197,11 +223,11 @@ class EditDriverProfile extends Component {
           <br/>
           <h2>Locations</h2>
           <br />
-          <select id="location" value={this.state.place1} style={{width: '40%',float: 'left', padding: '1%'}} id="place1"  onChange={this.setPlace1}>
+          <select id="location"  style={{width: '40%',float: 'left', padding: '1%'}}  onChange={this.setPlace}>
             <option value="">Pickup place</option>
             {
-              this.state.locations.map((location)=>{
-                 return <option value={location.name}>{location.name}</option>
+              this.state.locations.map((location, key)=>{
+                 return <option key={key} value={location.name}>{location.name}</option>
               })
             }
           </select>
@@ -211,6 +237,18 @@ class EditDriverProfile extends Component {
             className='btn'>
             Add
           </button>
+          <br />
+          <br />
+          {
+            this.state.driverLocation.map((loc, key) => {
+              return(
+                <span key={key} style={{padding: '2%'}} className="row" >
+                  {loc}&nbsp;&nbsp;&nbsp;
+                  <span onClick={() => this.deleteLocation(loc)} className="btn btn-danger">X</span>
+                </span>
+              )
+            })
+          }
           <br />
           <button
             style={{marginRight: '5px', marginTop: '5px'}}
