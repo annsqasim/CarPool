@@ -1,9 +1,50 @@
 import React, { Component } from 'react';
 import HeaderDriver from './HeaderDriver';
+import Autocomplete from 'react-autocomplete';
+import request from 'superagent';
 // import './css/App.css';
 
 class EditDriverProfile extends Component {
-
+  constructor (props) {
+    super(props);
+    this.state = {
+      locations: [],
+      name: '',
+      cnic:'',
+      address:'',
+      phoneno:'',
+      carName:'',
+      license:'',
+      carModel:'',
+      capacity:'',
+      gender:'',
+    };
+  }
+  componentDidMount () {
+    const BASE_URL = 'http://192.168.0.104:8080/';
+    const url =`${BASE_URL}location`;
+    this.getLocations(url);
+  }
+  getLocations(url) {
+    return new Promise((resolve, reject) => {
+      request
+      .get(url)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const response = JSON.parse(res.text);
+          this.setState({locations: response.locations});
+          resolve();
+        }
+      });
+    });
+  }
+  setGender = () => {
+    const op = document.getElementById('gender');
+    var gender = op.options[op.selectedIndex].value;
+    this.setState({gender});
+  }
   editDriverProfile = () => {
     console.log('hello');
   }
@@ -19,91 +60,71 @@ class EditDriverProfile extends Component {
             className='form-control'
             type='text'
             placeholder='name'
-            onChange={event => this.setState({email: event.target.value})}
+            onChange={event => this.setState({name: event.target.value})}
           />
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='cnic'
-            onChange={event => this.setState({email: event.target.value})}
+            onChange={event => this.setState({cnic: event.target.value})}
           />
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='address'
-            onChange={event => this.setState({password: event.target.value})}
+            onChange={event => this.setState({address: event.target.value})}
           />
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='phone no'
-            onChange={event => this.setState({password: event.target.value})}
+            onChange={event => this.setState({phoneNo: event.target.value})}
           />
+          <br/>
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='Car name'
-            onChange={event => this.setState({password: event.target.value})}
+            onChange={event => this.setState({carName: event.target.value})}
           />
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='License'
-            onChange={event => this.setState({password: event.target.value})}
+            onChange={event => this.setState({license: event.target.value})}
           />
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='Car model'
-            onChange={event => this.setState({password: event.target.value})}
+            onChange={event => this.setState({carModel: event.target.value})}
           />
           <input
             style={{marginRight: '5px', marginTop: '5px'}}
             className='form-control'
             type='text'
             placeholder='Capacity'
-            onChange={event => this.setState({password: event.target.value})}
+            onChange={event => this.setState({capacity: event.target.value})}
           />
           <br />
-          <div class="radio">
-            <h3>Gender</h3>
-            <label className="radio-inline"><input type="radio" name="optradio" />Male</label>
-            <label className="radio-inline"><input type="radio" name="optradio" />Female</label>
-          </div>
+          <select id="gender" className="form-control" onChange={this.setGender}>
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
           <br/>
-          <h2>PickUp Location</h2>
-          <input
-            style={{marginRight: '5px', marginTop: '5px'}}
-            className='form-control'
-            type='time'
-            onChange={event => this.setState({password: event.target.value})}
-          />
-          <input
-            style={{marginRight: '5px', marginTop: '5px'}}
-            className='form-control'
-            type='text'
-            placeholder='place'
-            onChange={event => this.setState({password: event.target.value})}
-          />
-          <h2>DropOff Location</h2>
-          <input
-            style={{marginRight: '5px', marginTop: '5px'}}
-            className='form-control'
-            type='time'
-            onChange={event => this.setState({password: event.target.value})}
-          />
-          <input
-            style={{marginRight: '5px', marginTop: '5px'}}
-            className='form-control'
-            type='text'
-            placeholder='place'
-            onChange={event => this.setState({password: event.target.value})}
+          <h2>Locations</h2>
+          <br />
+          <Autocomplete
+            getItemValue={''}
+            items={this.state.locations}
+            renderItem={''}
           />
           <br />
           <button
