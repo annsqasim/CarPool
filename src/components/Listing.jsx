@@ -53,9 +53,8 @@ class Listing extends Component {
             <h4>Time 2 : {this.props.driver.pickupTime2}</h4>
           </div>
           <div className="col-md-3 contact">
-            <a className="kc-btn" href="" style={{marginTop: '20px'}}>Request</a>
             <button
-              className="kc-btn redirect"
+              className="kc-btn "
               style={{marginTop: '20px'}}
               onClick={this.handleSubscribe}
               value={this.props.driver.id}

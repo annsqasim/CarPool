@@ -7,7 +7,7 @@ class Driver extends Component {
     return (
       <div className="App">
       <HeaderDriver />
-      <h1>Current Passeneger</h1>
+      <h1>Current Passenger</h1>
       </div>
     );
   }

@@ -14,9 +14,10 @@ import { firebaseApp } from './firebase';
 import request from 'superagent';
 
 const browserHistory = createBrowserHistory();
-
+let userProfile = null;
 firebaseApp.auth().onAuthStateChanged(user =>{
   if (user) {
+    userProfile = user;
     const BASE_URL = 'http://192.168.0.104:8080/';
     const SIGN_IN_USER = `${BASE_URL}user/${user.uid}`;
     return new Promise((resolve, reject) => {
@@ -49,7 +50,7 @@ ReactDOM.render(
       <Route path="/app" component={App} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/passenger" component={Passenger} />
+      <Route path="/passenger" component={() => (<Passenger user={userProfile} />)} />
       <Route path="/driver" component={Driver} />
       <Route path="/editpassengerprofile" component={EditPassengerProfile} />
       <Route path="/editdriverprofile" component={EditDriverProfile} />

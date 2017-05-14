@@ -223,7 +223,7 @@ class EditDriverProfile extends Component {
           <br/>
           <h2>Locations</h2>
           <br />
-          <select id="location"  style={{width: '40%',float: 'left', padding: '1%'}}  onChange={this.setPlace}>
+          <select id="location"  style={{float: 'left', padding: '1%'}}  onChange={this.setPlace}>
             <option value="">Pickup place</option>
             {
               this.state.locations.map((location, key)=>{
@@ -231,12 +231,6 @@ class EditDriverProfile extends Component {
               })
             }
           </select>
-          <button
-            style={{marginRight: '5px', marginTop: '5px'}}
-            onClick={this.addLoc}
-            className='btn'>
-            Add
-          </button>
           <br />
           <br />
           {

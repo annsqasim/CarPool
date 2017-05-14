@@ -221,7 +221,7 @@ class EditPassengerProfile extends Component {
         <button
           style={{marginRight: '5px', marginTop: '5px', width: '20%',float: 'right'}}
           onClick={this.editPassengerProfile}
-          className='btn btn-primary'>
+          className='btn btn-success'>
           Save
         </button>
         <br />
