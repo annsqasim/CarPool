@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Listing extends Component {
 
   render() {
-    console.log(this.props.driver);
     return (
       <div className="row card">
         <div className="col-md-9 info">

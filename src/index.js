@@ -27,7 +27,6 @@ firebaseApp.auth().onAuthStateChanged(user =>{
           console.log(err);
           browserHistory.replace('/signin');
         } else {
-          console.log(JSON.parse(res.text));
           const user = JSON.parse(res.text);
           if (user.type === 'passenger') {
             browserHistory.push('/passenger');
