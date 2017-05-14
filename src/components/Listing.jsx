@@ -7,6 +7,7 @@ class Listing extends Component {
     super(props);
     this.state = {
       status: '',
+      subsID:'',
     }
   }
   handleSubscribe = (e) => {
@@ -14,6 +15,13 @@ class Listing extends Component {
     const BASE_URL = 'http://192.168.0.104:8080/';
     const user = firebaseApp.auth().currentUser;
     const SUBSCRIBE = `${BASE_URL}passenger/${user.uid}/subscribe/${driverId}`;
+    this.applySubscription(SUBSCRIBE);
+  }
+  handleApprove = (e) => {
+    const ApproveId = this.props.subscriber.id;
+    const BASE_URL = 'http://192.168.0.104:8080/';
+    const user = firebaseApp.auth().currentUser;
+    const SUBSCRIBE = `${BASE_URL}driver/${user.uid}/accept/${ApproveId}`;
     this.applySubscription(SUBSCRIBE);
   }
 
@@ -31,10 +39,6 @@ class Listing extends Component {
             status.innerHTML = 'Subscribed Successfully';
             // this.setState({ state: "Subscribed Successfully" });
           }
-          if(res.text === 'Already subscribed'){
-            alert(res.text);
-            // this.setState({ state: "Subscribed Successfully" });
-          }
           resolve();
         }
       });
@@ -42,21 +46,17 @@ class Listing extends Component {
   }
 
   render() {
-    console.log(this.props.driver);
     return (
       <div className="container">
         <div className="row card">
+        {
+          this.props.driver ?
+          <div>
           <div className="col-md-6 info">
             <h2>Name : {this.props.driver.name}</h2>
             <p>No of Customers : {this.props.driver.subscriptions}</p>
             <p>Time 1 : {this.props.driver.pickupTime1}</p>
             <p>Phone: {this.props.driver.phone}</p>
-            Locations :
-            {
-              this.props.driver.locations.map((loc, key)=>{
-                return <span key={key} className="btn"><b> {loc}</b> </span>
-              })
-            }
           </div>
           <div className="col-md-3 contact-info">
             <h4>Capacity : {this.props.driver.capacity}</h4>
@@ -73,6 +73,18 @@ class Listing extends Component {
             </button>
             <small id="status"></small>
           </div>
+          </div>
+          :
+          <div className="col-md-6">
+            <h4>Name : {this.props.subscriber.passenger.name}</h4>
+            <button
+              style={{marginRight: '5px', marginTop: '5px', width: '20%',float: 'right'}}
+              onClick={this.handleApprove}
+              className='kc-btn'>
+              Approve
+            </button>
+          </div>
+        }
         </div>
       </div>
     );
