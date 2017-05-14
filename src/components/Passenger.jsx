@@ -23,7 +23,7 @@ class Passenger extends Component {
           var drivers = JSON.parse(res.text);
           console.log(drivers);
           this.setState({ driversList: drivers });
-          resolve();          
+          resolve();
         }
       });
     });
@@ -60,6 +60,14 @@ class Passenger extends Component {
                 </div>
             </div>
         </div>
+        </div>
+        <div style={{padding: '3%'}}>
+          {
+            this.state.driversList.length > 0 ?
+            this.state.driversList.map((driver,key) => {
+              return( <Listing driver={driver} key={key}/>);
+            }) : <h1>kkk</h1>
+          }
         </div>
       </div>
     );

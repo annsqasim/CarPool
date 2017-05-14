@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Listing extends Component {
-  
+
   render() {
     console.log(this.props.driver);
     return (
@@ -17,5 +17,4 @@ class Listing extends Component {
     );
   }
 }
-
-module.export = Listing;
+export default Listing;
