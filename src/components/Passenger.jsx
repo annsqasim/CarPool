@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import request from 'superagent';
-import { firebaseApp } from '../firebase';
 import Listing from './Listing';
 // import './css/App.css';
 
@@ -12,6 +11,11 @@ class Passenger extends Component {
       driversList: [],
       costProfile: {},
       user : null,
+      cost:'',
+      distance:'',
+      location1:'',
+      location2:'',
+
     }
   }
   getDrivers(url) {
@@ -90,11 +94,16 @@ class Passenger extends Component {
             </div>
         </div>
         </div>
-        <div className="row">
-          <h3 className="col col-sm-4">Locations</h3>
-          <h3 className="col col-sm-4">Estimated Charges</h3>
-          <h3 className="col col-sm-4">Distance</h3>
-        </div>
+        { (!!this.state.costProfile.location1 &&
+          !!this.state.costProfile.location2 &&
+          !!this.state.costProfile.cost &&
+          !!this.state.costProfile.distance) ?
+          <div className="row">
+            <h3 className="col col-sm-4">Locations <span style={{color: 'green'}}><br />{this.state.costProfile.location1} <br />{this.state.costProfile.location2}</span> </h3>
+            <h3 className="col col-sm-4">Estimated Charges <span style={{color: 'green'}}><br />Rs. {Math.round(this.state.costProfile.cost)}</span></h3>
+            <h3 className="col col-sm-4">Distance<span style={{color: 'green'}}><br />{Math.round(this.state.costProfile.distance)}km</span></h3>
+          </div> : ''
+        }
         <div className="row" style={{padding: '3%'}}>
           {
             this.state.driversList.length > 0 ?

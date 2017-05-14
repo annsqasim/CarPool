@@ -104,7 +104,7 @@ class EditDriverProfile extends Component {
             cnic: data.cnic,
             gender: data.gender,
             address: data.address,
-            phone: data.phone,
+            phoneno: data.phone,
             carName: data.carName,
             license: data.license,
             driverLocation: data.locations,
@@ -124,7 +124,7 @@ class EditDriverProfile extends Component {
         cnic: this.state.cnic,
         gender: this.state.gender,
         address: this.state.address,
-        phone: this.state.phone,
+        phone: this.state.phoneno,
         carName: this.state.carName,
         license: this.state.license,
         locations: this.state.driverLocation,
@@ -179,7 +179,7 @@ class EditDriverProfile extends Component {
             type='text'
             placeholder='phone no'
             value={this.state.phoneno}
-            onChange={event => this.setState({phoneNo: event.target.value})}
+            onChange={event => this.setState({phoneno: event.target.value})}
           />
           <br/>
           <input
