@@ -51,10 +51,9 @@ ReactDOM.render(
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/passenger" component={() => (<Passenger user={userProfile} />)} />
-      <Route path="/driver" component={Driver} />
+      <Route path="/driver" component={() => (<Driver user={userProfile} />)} />
       <Route path="/editpassengerprofile" component={EditPassengerProfile} />
       <Route path="/editdriverprofile" component={EditDriverProfile} />
-
     </div>
   </Router>,
   document.getElementById('root')
