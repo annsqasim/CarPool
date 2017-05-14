@@ -11,7 +11,7 @@ class Passenger extends Component {
     this.state = {
       driversList: [],
       costProfile: {},
-      user : {},
+      user : null,
     }
   }
   getDrivers(url) {
@@ -59,6 +59,10 @@ class Passenger extends Component {
     const BASE_URL = 'http://192.168.0.104:8080/';
     const GET_DRIVERS = `${BASE_URL}driver`;
     this.getDrivers(GET_DRIVERS);
+    if(!!this.state.user) {
+      const GET_COST = `${BASE_URL}passenger/${this.state.user.uid}/costing`;
+      this.getCost(GET_COST);
+    }
   }
 
   render() {
