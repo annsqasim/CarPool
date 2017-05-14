@@ -50,9 +50,9 @@ class Passenger extends Component {
                         <div className="btn-group rsvp-options dropdown">
                             <input
                                 className='locationSearch'
-                          type='text'
-                          placeholder='Location'
-                          onChange={event => this.setState({location: event.target.value})}
+                                type='text'
+                                placeholder='Location'
+                                onChange={event => this.setState({location: event.target.value})}
                             />
                         </div>
                     </div>

@@ -175,6 +175,21 @@ input, select, textarea, .form-control{
 	top: 23px;
 }
 
+.info h2{
+	text-transform: uppercase;
+	color: #1ca54e;
+}
+.info p{
+	text-transform: uppercase;
+	color: #666666;
+}
+
+.contact-info{
+	margin-top: 5rem;
+	text-transform: uppercase;
+	color: #666666;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
