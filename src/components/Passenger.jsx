@@ -21,8 +21,8 @@ class Passenger extends Component {
           reject();
         } else {
           var drivers = JSON.parse(res.text);
-          console.log(drivers);
           this.setState({ driversList: drivers });
+          console.log(this.state.driversList);
           resolve();
         }
       });
@@ -36,7 +36,6 @@ class Passenger extends Component {
   }
 
   render() {
-    console.log(this.state.driversList);
     return (
       <div className="App">
         <div className="get-the-app-content">

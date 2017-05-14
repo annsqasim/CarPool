@@ -115,8 +115,6 @@ class EditPassengerProfile extends Component {
     });
   }
   render() {
-
-    const name = '';
     return (
       <div className="App">
       <Header />
@@ -181,8 +179,8 @@ class EditPassengerProfile extends Component {
           <select value={this.state.place1} style={{width: '40%',float: 'left', padding: '1%'}} id="place1"  onChange={this.setPlace1}>
             <option value="">Pickup place</option>
             {
-              this.state.locations.map((location)=>{
-                 return <option value={location.name}>{location.name}</option>
+              this.state.locations.map((location,key)=>{
+                 return <option key={key} value={location.name}>{location.name}</option>
               })
             }
           </select>
@@ -208,8 +206,8 @@ class EditPassengerProfile extends Component {
           <select value={this.state.place2} style={{width: '40%',float: 'left', padding: '1%'}} id="place2"  onChange={this.setPlace2}>
             <option value="">Pickup place</option>
             {
-              this.state.locations.map((location)=>{
-                 return <option value={location.name}>{location.name}</option>
+              this.state.locations.map((location, key)=>{
+                 return <option key={key} value={location.name}>{location.name}</option>
               })
             }
           </select>
